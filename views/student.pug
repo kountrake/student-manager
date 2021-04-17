@@ -1,0 +1,96 @@
+extends layout
+
+append headblock
+  script(type="module" src="/javascripts/studentListener.js")
+
+block content
+  div(class="flex flex-col content-center w-full")
+    div(class="m-auto bg-white w-11/12 mt-5")
+      h1(class="pl-16 text-4xl font-bold") Gestion des étudiants
+
+      div(class="flex flex-col my-5")
+        #create_form.flex.flex-row(style="")
+          input(
+            class="mr-3 border-2 border-gray-300 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
+            placeholder="Nom"
+            name="lastname"
+            id="lastname_create"
+          )
+          input(
+            class="mr-3 border-2 border-gray-300 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
+            placeholder="Pierre,Paul,Jacques,..."
+            name="firstnames"
+            id="firstnames_create"
+          )
+          input(
+            class="mr-3 border-2 border-gray-300 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
+            placeholder="N° Étudiant"
+            name="number"
+            id="number_create"
+          )
+          button(
+            id="submit"
+            class="w-1/5 focus:outline-none text-white text-sm py-1.5 px-2 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+          ) Ajouter
+
+        #update_form(style='display:none;').flex.flex-row
+          input(
+            name="studentId"
+            id="update_student_id"
+            value=""
+            hidden="hidden"
+          )
+          input(
+            class="mr-3 border-2 border-gray-300 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
+            name="lastname"
+            id="lastname_update"
+          )
+          input(
+            class="mr-3 border-2 border-gray-300 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
+            name="firstnames"
+            id="firstnames_update"
+          )
+          input(
+            class="mr-3 border-2 border-gray-300 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 "
+            name="number"
+            id="number_update"
+            disabled="disabled"
+          )
+          button(
+            id="update_student"
+            class="w-1/5 focus:outline-none text-white text-sm py-1.5 px-2 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+          ) Modifier
+          button(
+            id="cancel_update"
+            onclick="cancelUpdate()"
+            class="ml-3 focus:outline-none text-red-700 text-2xl bold py-1.5 px-3 rounded-md border-2 border-red-500 hover:border-red-600 hover:shadow-lg"
+          ) X
+
+      #message(class="flex justify-center border border-gray-300 w-full p-3 my-4" style="display:none;")
+        p#success(class="text-l text-green-400 bold text-center" style='display:none;')
+        p#error(class="text-l text-red-500 bold text-center" style='display:none;')
+
+      div(class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg")
+        table.min-w-full
+          thead
+            tr
+              th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Nom
+              th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Prénoms
+              th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") N° étudiant
+              th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Actions
+          tbody.bg-white
+          each student in students
+            tr(id=student._id)
+              td(class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500")= student.lastname
+              td(class="firstnames px-6 py-4 whitespace-no-wrap border-b border-gray-500")= student.firstnames
+              td(class="firstnames px-6 py-4 whitespace-no-wrap border-b border-gray-500")= student.number
+              td
+                button(
+                  class="put mr-3 focus:outline-none text-white text-sm py-1.5 px-2 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg"
+                  data-studentid= student._id,
+                  data-student= student
+                  )  Modifier
+                button(
+                  class="delete focus:outline-none text-white text-sm py-1.5 px-2 rounded-md bg-red-500 hover:bg-red-600 hover:shadow-lg"
+                  data-studentid= student._id
+                  )  Supprimer

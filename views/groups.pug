@@ -1,0 +1,75 @@
+extends layout
+
+append headblock
+  script(type="module" src="/javascripts/groupListener.js")
+
+block content
+  div(class="flex flex-col content-center w-full")
+    div(class="m-auto bg-white w-11/12 mt-5")
+      h1(class="pl-16 text-4xl font-bold")= title
+
+      #message(class="flex justify-center border border-gray-300 w-full p-3 my-4" style="display:none;")
+        p#success(class="text-l text-green-400 bold text-center" style='display:none;')
+        p#error(class="text-l text-red-500 bold text-center" style='display:none;')
+
+      div(class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg")
+        h2.text-2xl=allGroups
+        .flex.flex-row.items-start
+          table.min-w-max
+            thead
+              tr
+                th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Liste des Groupes
+            tbody.bg-white
+              tr(id='no_group')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="0") Aucun groupe
+              tr(id='group_1')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="1") Groupe 1
+              tr(id='group_2')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="2") Groupe 2
+              tr(id='group_3')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="3") Groupe 3
+              tr(id='group_4')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="4") Groupe 4
+              tr(id='group_5')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="5") Groupe 5
+              tr(id='group_6')
+                td(
+                  class="lastname px-6 py-4 whitespace-no-wrap border-b border-gray-500"
+
+                  )
+                  button.groupe(data-groupe="6") Groupe 6
+
+          table#students_in_group.min-w-full.ml-5
+            thead
+              tr
+                th(class="px-6 py-3 text-center text-l leading-4 text-blue-500 tracking-wider") Etudiant(s) dans le groupe:
+                  span#span
+              tr
+                th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Nom
+                th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Prénoms
+                th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") N° étudiant
+                th(class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider") Actions
